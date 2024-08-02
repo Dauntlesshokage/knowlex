@@ -17,6 +17,7 @@ import { Input } from "@/components/ui/input";
 import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { Loader2 } from "lucide-react";
+import LoadingButton from "@/components/loading-button";
 const formSchema = z.object({
   title: z.string().min(1).max(250),
 });
@@ -58,10 +59,12 @@ export default function UploadDocumentForm({
             </FormItem>
           )}
         />
-        <Button type="submit" disabled={form.formState.isSubmitting}>
-          {form.formState.isSubmitting && <Loader2 className="animate-spin" />}
+        <LoadingButton
+          isLoading={form.formState.isSubmitting}
+          loadingText="Uploading..."
+        >
           Upload
-        </Button>
+        </LoadingButton>
       </form>
     </Form>
   );
