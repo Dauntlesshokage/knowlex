@@ -1,6 +1,8 @@
 "use client";
+import { Button } from "@/components/ui/button";
 import { api } from "@/convex/_generated/api";
 import { SignInButton, UserButton } from "@clerk/nextjs";
+import { ModeToggle } from "@/components/ui/mode-toggle";
 import {
   Authenticated,
   Unauthenticated,
@@ -18,13 +20,14 @@ export default function Home() {
       </Unauthenticated>
       <Authenticated>
         <UserButton />
-        <button
+
+        <Button
           onClick={() => {
             createDocument({ title: "Hello world" });
           }}
         >
           Click Me
-        </button>
+        </Button>
         {fetchDocument?.map((documents) => (
           <div key={documents._id}>{documents.title}</div>
         ))}
