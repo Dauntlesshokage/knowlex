@@ -20,6 +20,7 @@ import { Loader2 } from "lucide-react";
 import LoadingButton from "@/components/loading-button";
 const formSchema = z.object({
   title: z.string().min(1).max(250),
+  file: z.instanceof(File),
 });
 export default function UploadDocumentForm({
   onUpload,
@@ -51,6 +52,29 @@ export default function UploadDocumentForm({
               <FormLabel>Title</FormLabel>
               <FormControl>
                 <Input placeholder="report" {...field} />
+              </FormControl>
+              <FormDescription>
+                This is your public display name.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <FormField
+          control={form.control}
+          name="file"
+          render={({ field: { value, onChange, ...fieldProps } }) => (
+            <FormItem>
+              <FormLabel>File</FormLabel>
+              <FormControl>
+                <Input
+                  {...fieldProps}
+                  type="file"
+                  onChange={(event) => {
+                    const file = event.target.files?.[0];
+                    onChange(file);
+                  }}
+                />
               </FormControl>
               <FormDescription>
                 This is your public display name.
